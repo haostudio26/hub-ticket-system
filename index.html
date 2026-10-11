@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFF8F0">
+  <title>Hub｜電子票券</title>
+  <style>
+    :root {
+      --橘色: #D98255;
+      --米白: #FFF8F0;
+      --奶茶: #F6E1CF;
+      --咖啡: #5B5149;
+      --海軍藍: #273B52;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--米白);
+      color: var(--咖啡);
+      font-family: "Noto Sans TC", "Microsoft JhengHei",
+        sans-serif;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 7%;
+      border-bottom: 1px solid #eadfd4;
+    }
+
+    .品牌 {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 1px;
+    }
+
+    .標誌 {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      background: var(--橘色);
+      color: white;
+      font-size: 17px;
+    }
+
+    .管理入口 {
+      color: var(--咖啡);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    main {
+      width: min(920px, 88%);
+      margin: 55px auto;
+    }
+
+    .提示 {
+      color: var(--橘色);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      margin: 12px 0;
+      color: var(--海軍藍);
+      font-size: clamp(30px, 6vw, 46px);
+      letter-spacing: 1px;
+    }
+
+    .介紹 {
+      color: #81766e;
+      line-height: 1.9;
+    }
+
+    .展覽卡 {
+      margin-top: 35px;
+      padding: clamp(24px, 5vw, 42px);
+      background: white;
+      border: 1px solid #eee2d7;
+      border-radius: 24px;
+      box-shadow: 0 12px 36px #5b51490c;
+    }
+
+    .展覽標籤 {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: var(--奶茶);
+      color: var(--咖啡);
+      font-size: 12px;
+    }
+
+    h2 {
+      margin: 18px 0 10px;
+      color: var(--海軍藍);
+      font-size: 25px;
+    }
+
+    .說明 {
+      line-height: 1.8;
+      color: #81766e;
+      font-size: 14px;
+    }
+
+    .按鈕 {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 13px 22px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--橘色);
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .按鈕:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--海軍藍);
+      outline-offset: 4px;
+    }
+
+    .提醒 {
+      display: none;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 10px;
+      background: var(--奶茶);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    footer {
+      padding: 25px;
+      text-align: center;
+      color: #978a80;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 16px 6%;
+      }
+
+      main {
+        margin: 38px auto;
+      }
+
+      .展覽卡 {
+        border-radius: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="品牌">
+      <span class="標誌">H</span>
+      <span>Hub</span>
+    </div>
+    <a class="管理入口" href="#管理說明">管理入口</a>
+  </header>
+
+  <main>
+    <div class="提示">YOUR TICKET SPACE</div>
+    <h1>每一張票，都有自己的位置。</h1>
+    <p class="介紹">
+      簡單、清楚地管理你的電子票券。
+      <br>
+      選擇展覽，開始你的票券旅程。
+    </p>
+
+    <section class="展覽卡">
+      <span class="展覽標籤">首個展覽</span>
+      <h2>桃園兒童美術館</h2>
+      <p class="說明">
+        Hub 私人票券管理專案。
+        這是自建的電子票券展示與管理系統，
+        並非該美術館的官方售票或驗票服務。
+      </p>
+      <button class="按鈕" id="展覽按鈕">
+        查看展覽
+      </button>
+      <div class="提醒" id="展覽提醒" role="status">
+        首頁已建立。展覽資料、電子票券及領票功能將在後續階段接上。
+      </div>
+    </section>
+
+    <section id="管理說明" class="展覽卡">
+      <h2>管理入口</h2>
+      <p class="說明">
+        管理員登入、展覽設定、票券建立與驗票功能，
+        將在後續階段完成。
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    Hub 電子票券管理系統
+    <br>
+    私人專案・非官方售票服務
+  </footer>
+
+  <script>
+    const 展覽按鈕 = document.getElementById('展覽按鈕');
+    const 展覽提醒 = document.getElementById('展覽提醒');
+
+    展覽按鈕.addEventListener('click', function () {
+      展覽提醒.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
