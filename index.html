@@ -215,13 +215,69 @@
     
   </footer>
 
-  <script>
-    const 展覽按鈕 = document.getElementById('展覽按鈕');
-    const 展覽提醒 = document.getElementById('展覽提醒');
 
-    展覽按鈕.addEventListener('click', function () {
-      展覽提醒.style.display = 'block';
+<script>
+  // Hub 後端網址
+  const 後端網址 = 'https://script.google.com/macros/s/AKfycbwi5IonE-SWqSfGOOd7ruh4NHCNip7ts93WbmvPY_GmrsD1gcY5Hywme5knPR65Iy-n/exec';
+
+  const 展覽按鈕 = document.getElementById('展覽按鈕');
+  const 展覽提醒 = document.getElementById('展覽提醒');
+
+  const 連線橋梁 = document.createElement('iframe');
+  連線橋梁.title = 'Hub 後端連線';
+  連線橋梁.style.display = 'none';
+
+  let 連線結果 = '正在連線，請稍候……';
+  let 已收到回覆 = false;
+  const 測試編號 = 'hub-ping-001';
+
+  function 更新連線畫面() {
+    展覽提醒.textContent = 連線結果;
+  }
+
+  window.addEventListener('message', function (事件) {
+    if (事件.source !== 連線橋梁.contentWindow) return;
+    if (!事件.data || 事件.data.source !== 'Hub連線橋梁') return;
+    if (事件.data.requestId !== 測試編號) return;
+
+    已收到回覆 = true;
+
+    if (事件.data.result && 事件.data.result.ok === true) {
+      連線結果 = 'Hub 後端與資料庫連線成功！';
+    } else {
+      連線結果 = '後端有回應，但資料庫連線尚未成功。';
+    }
+
+    更新連線畫面();
+  });
+
+  展覽按鈕.addEventListener('click', function () {
+    展覽提醒.style.display = 'block';
+    更新連線畫面();
+  });
+
+  if (後端網址.startsWith('https://') &&
+      後端網址.endsWith('/exec')) {
+    連線橋梁.src = 後端網址;
+    document.body.appendChild(連線橋梁);
+
+    連線橋梁.addEventListener('load', function () {
+      連線橋梁.contentWindow.postMessage({
+        action: 'ping',
+        requestId: 測試編號
+      }, '*');
     });
-  </script>
+  } else {
+    連線結果 = '尚未填入正確的後端網址。';
+  }
+
+  window.setTimeout(function () {
+    if (!已收到回覆) {
+      連線結果 = '連線逾時，請檢查後端部署與連線設定。';
+      更新連線畫面();
+    }
+  }, 15000);
+</script>
+
 </body>
 </html>
